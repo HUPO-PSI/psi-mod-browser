@@ -21,7 +21,24 @@
       <v-card-text class="pa-4">
         <v-row>
           <v-col cols="12" md="4">
-            <div class="text-subtitle-1 font-weight-medium mb-2">Details</div>
+            <div v-if="currentItem?.definition" class="mb-2">
+              <div class="text-subtitle-1 font-weight-medium mb-2">Definition</div>
+              <div class="text-body-2 mb-2">{{ currentItem.definition }}</div>
+              <div v-if="currentItem?.definitionXrefs && currentItem.definitionXrefs.length > 0" class="d-flex flex-wrap gap-2">
+                <v-chip
+                  v-for="(ref, idx) in currentItem.definitionXrefs"
+                  :key="`def-ref-${idx}-${ref}`"
+                  class="mr-2 my-1"
+                  color="blue-grey-lighten-1"
+                  size="small"
+                  variant="tonal"
+                >
+                  {{ ref }}
+                </v-chip>
+              </div>
+            </div>
+
+            <div class="text-subtitle-1 font-weight-medium mt-4">Details</div>
             <div v-if="detailsXrefs.length > 0">
               <v-table class="bg-transparent" density="compact">
                 <tbody>
@@ -42,6 +59,8 @@
               <div class="text-subtitle-1 font-weight-medium mb-1">Comment</div>
               <div class="text-body-2">{{ currentItem.comment }}</div>
             </div>
+
+
           </v-col>
 
           <v-col cols="12" md="4">
