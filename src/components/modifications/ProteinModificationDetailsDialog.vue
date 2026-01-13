@@ -280,7 +280,7 @@
   const allXrefs = computed<Xref[]>(() => Array.isArray(currentItem.value?.xrefs) ? currentItem.value!.xrefs as Xref[] : [])
   const unimodXrefs = computed(() => allXrefs.value.filter(x => x.database?.toLowerCase() === 'unimod'))
   const uniprotPtmXrefs = computed(() => allXrefs.value.filter(x => x.database?.toLowerCase() === 'uniprot.ptm'))
-  const chebiXrefs = computed(() => currentItem.value?.definitionXrefs?.filter(x => x.toLowerCase().includes('chebi')) || [])
+  const chebiXrefs = computed(() => allXrefs.value.filter(x => x.database?.toLowerCase().includes('chebi')).map(x => x.value) || [])
   const excludedSet = new Set(['unimod', 'uniprot.ptm', 'chebi'])
   const detailsXrefs = computed(() => allXrefs.value.filter(x => !excludedSet.has(String(x.database).toLowerCase())))
 
