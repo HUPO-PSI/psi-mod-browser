@@ -24,11 +24,11 @@ export default class AnalyticsManager {
   }
 
   private logEvent(event_name: string, event_params?: any) {
-    // // @ts-ignore
-    // if (process.env.NODE_ENV !== 'production') {
-    //   // We are running the app in development mode and we don't want to log any requests...
-    //   return;
-    // }
+    // @ts-ignore
+    if (process.env.NODE_ENV !== 'production') {
+      // We are running the app in development mode and we don't want to log any requests...
+      return;
+    }
 
     // Use Umami's tracking function
     if (window.umami && typeof window.umami.track === 'function') {
