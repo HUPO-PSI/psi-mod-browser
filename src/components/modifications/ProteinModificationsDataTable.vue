@@ -125,8 +125,10 @@
   import { useProteinModificationsFilters } from '@/composables/useProteinModificationsFilters'
   import { useOboStore } from '@/stores/obo'
   import { useDisplay } from 'vuetify'
+  import AnalyticsManager from '@/system/analytics/AnalyticsManager';
 
   const { lgAndUp } = useDisplay();
+  const analyticsManager = new AnalyticsManager();
 
   const {
     error,
@@ -135,6 +137,12 @@
     getXrefValue,
     getChebiInfo,
     getUnimodInfo,
+    leafOnly,
+    hasSmilesOnly,
+    selectedOrigin,
+    selectedTermSpec,
+    diffMonoRange,
+    massMonoRange,
   } = useProteinModificationsFilters()
 
   const oboStore = useOboStore()
@@ -199,6 +207,17 @@
   function openDetails (item: any) {
     selectedItem.value = item
     detailsOpen.value = true
+
+    analyticsManager.logViewMod(item.id, {
+      leafOnly: leafOnly.value,
+      hasSmilesOnly: hasSmilesOnly.value,
+      selectedOrigin: selectedOrigin.value,
+      selectedTermSpec: selectedTermSpec.value,
+      diffMonoMin: Math.round(diffMonoRange.value[0]),
+      diffMonoMax: Math.round(diffMonoRange.value[1]),
+      massMonoMin: Math.round(massMonoRange.value[0]),
+      massMonoMax: Math.round(massMonoRange.value[1])
+    });
   }
 
   function onRowClick (ev: MouseEvent, row: any) {
