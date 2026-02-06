@@ -1,5 +1,6 @@
 import { computed, ref, watch } from 'vue'
 import { useOboStore } from '@/stores/obo'
+import type {OboXref} from "@/system/obo/OboXRef.ts";
 
 // Singleton state to be shared across all component instances
 let sharedState: ReturnType<typeof createSharedState> | null = null
@@ -312,15 +313,15 @@ function createSharedState () {
   }
 
   function getChebiInfo (item: any): { label: string, url: string } | null {
-    const refs: string[] | undefined = item?.definitionXrefs
+    const refs: OboXref[] | undefined = item?.xrefs
     if (!Array.isArray(refs) || refs.length === 0) {
       return null
     }
-    const ref = refs.find(r => /^chebi:\s*/i.test(r))
+    const ref = refs.find(r => r.database?.toLowerCase().includes('chebi'))
     if (!ref) {
       return null
     }
-    const m = ref.match(/chebi:\s*([0-9]+)/i)
+    const m = ref.value.match(/chebi:\s*([0-9]+)/i)
     if (!m) {
       return null
     }

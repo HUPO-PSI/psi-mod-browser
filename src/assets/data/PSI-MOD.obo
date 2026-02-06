@@ -135,7 +135,7 @@ is_a: MOD:01157 ! protein modification categorized by amino acid modified
 [Term]
 id: MOD:00010
 name: L-alanine residue
-def: "A protein modification that effectively converts a source amino acid residue to an L-alanine." [ChEBI:29948, DeltaMass:0, PubMed:6692818, RESID:AA0001]
+def: "A protein modification that effectively converts a source amino acid residue to an L-alanine." [DeltaMass:0, PubMed:6692818, RESID:AA0001]
 subset: PSI-MOD-slim
 synonym: "(2S)-2-aminopropanoic acid" EXACT RESID-systematic []
 synonym: "2-aminopropionic acid" EXACT RESID-alternate []
@@ -154,6 +154,7 @@ xref: MassMono: "71.037114"
 xref: Origin: "A"
 xref: Source: "natural"
 xref: TermSpec: "none"
+xref: ChEBI: "ChEBI:29948"
 is_a: MOD:00570 ! residues isobaric at 71.037114 Da
 is_a: MOD:00859 ! modified residue that can arise from different natural residues
 is_a: MOD:01441 ! natural, standard, encoded residue
